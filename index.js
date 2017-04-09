@@ -1,3 +1,5 @@
+var passport = require('./config/ppConfig')
+require('dotenv').config({silent: true})
 var session = require('express-session')
 var express = require('express');
 var ejsLayouts = require('express-ejs-layouts');
@@ -22,6 +24,8 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
+app.use(passport.initialize());
+app.use(passport.session())
 
 app.get('/', function(req, res) {
   res.render('index');
