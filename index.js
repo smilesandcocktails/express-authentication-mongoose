@@ -1,12 +1,13 @@
 var passport = require('./config/ppConfig')
-require('dotenv').config({silent: true})
 var session = require('express-session')
 var express = require('express');
 var ejsLayouts = require('express-ejs-layouts');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose')
 var app = express();
-
+require('dotenv').config({silent: true})
+var flash = require('connect-flash')
+var isLoggedIn = require('./middleware/isLoggedIn')
 
 if (process.env.NODE_ENV === "test") {
   mongoose.connect('mongodb://localhost/express-authentication')
@@ -26,6 +27,13 @@ app.use(session({
 }))
 app.use(passport.initialize());
 app.use(passport.session())
+app.use(flash())
+app.use(function(req, res, next) {
+  res.locals.alerts = req.flash()
+  res.locals.currentUser = req.user
+  next()
+})
+app.use(isLoggedIn)
 
 app.get('/', function(req, res) {
   res.render('index');
@@ -34,6 +42,10 @@ app.get('/', function(req, res) {
 app.get('/profile', function(req, res) {
   res.render('profile');
 });
+
+app.get('/profile', isLoggedIn, function(req, res) {
+  res.render('profile')
+})
 
 app.use('/auth', require('./controllers/auth'));
 
