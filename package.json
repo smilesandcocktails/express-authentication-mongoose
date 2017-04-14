@@ -21,6 +21,7 @@
     "express": "^4.14.0",
     "express-ejs-layouts": "^2.2.0",
     "express-session": "^1.15.2",
+    "foreman": "^2.0.0",
     "mongoose": "^4.7.6",
     "morgan": "^1.7.0",
     "passport": "^0.3.2",

@@ -1,8 +1,8 @@
 var express = require('express');
+var router = express.Router();
+var User = require('../models/user')
 var passport = require('../config/ppConfig')
 // var db = require('../models')
-var User = require('../models/user')
-var router = express.Router();
 
 router.get('/signup', function(req, res) {
   res.render('auth/signup');
@@ -22,7 +22,6 @@ router.post('/signup', function (req,res) {
         successRedirect: '/',
         successFlash: 'Account created and logged in'
       })(req,res)
-
     }
   })
 })

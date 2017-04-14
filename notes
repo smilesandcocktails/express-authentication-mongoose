@@ -1,0 +1,62 @@
+REFER TO USER.JS
+
+//CREATING MODEL
+When you create a new User model, you can do CRUD .create, .read, .update, .delete etc
+
+
+//FOR VALIDATION OF THE TYPE, DO ALL REQUIRED TRUE
+
+//FOR EMAIL - UNIQUE: TRUE = cannot enter email address more than once
+
+//GOOGLE MONGOOSE VALIDATION
+
+// .pre = before event , so here is 'DO SOMETHING BEFORE SAVE USER' on the userSchema
+'THIS' refers to the user that is being created because it happens before saving the user, so THIS is the user
+
+user.password = my password
+hash = hashed code + user.password
+
+when we create in index.js, it will hash before saving it, which is what the pre is for
+----------------------------------------------------------
+REFER TO AUTH.TEST.JS
+
+1xx = info
+2xx = ok
+3xx = redirection
+4xx = request problem (client problem)
+5xx = server problem (my problem)
+
+--------------------------------------------------------
+REFER TO INDEX.JS
+
+app.use('/auth', require('./controllers/auth'));
+
+is like var authController = require('./controllers/auth')
+app.use('/', authController)
+
+all the /auth will go to require('./controllers/auth')
+
+GET '/' ==> index.ejs
+GET '/profile' ==> profile.ejs
+
+GET, POST, PUT
+'/' ==> authController
+          GET '/register'
+
+-------------------------------------------------------------
+For controller use the prima method:
+
+// FOR A PAGE FOR REGISTERED
+
+router.route('/register')
+.get(function (req, res) {
+    res.render('auth/signup')
+})
+.post(function (req, res) {
+    User.create({}, function (err, User) {
+      xxx
+    })
+    res.send('register flow')
+})
+
+-------------------------------------------------------------
